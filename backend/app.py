@@ -254,36 +254,66 @@ class WalkWithScottyAppWorkflow(Workflow):
 
     @step
     async def TrackRoute(self, ctx: Context, ev: TrackingEvent) -> VerifyPhotoEvent:
-        print("Waiting for milestone 1")
-        # await asyncio.sleep(0.5)
-        print("Waiting for milestone 1")
-        # await asyncio.sleep(0.5)
-        print("Waiting for milestone 1")
-        # await asyncio.sleep(0.5)
-        print("Achieved!")
-        print("Verify image step and Show Scotty through AR in the location")
+        print("📍 Reaching Milestone 1...")
+        await asyncio.sleep(1)
+        
+        print("⏳ Still moving toward Milestone 1...")
+        await asyncio.sleep(1)
 
-        print("Waiting for milestone 2")
-        # await asyncio.sleep(0.5)
-        print("Waiting for milestone 2")
-        # await asyncio.sleep(0.5)
-        print("Waiting for milestone 2")
-        # await asyncio.sleep(0.5)
-        print("Not yet achieved")
-        print("Detour, let's make the final path milestone 2, let's go there.")
-        print("Milestone 2 reached")
-        print("Verify Image Step")
+        print("⏳ Almost there...")
+        await asyncio.sleep(1)
+
+        print("✅ Milestone 1 Achieved!")
+        print("📸 Verifying photo at Milestone 1...")
+        await asyncio.sleep(1)
+
+        print("🦮 Showing Scotty through AR at the location 🗺️")
+        await asyncio.sleep(1.5)
+
+        print("\n📍 Heading to Milestone 2...")
+        await asyncio.sleep(1)
+
+        print("⏳ Still en route to Milestone 2...")
+        await asyncio.sleep(1)
+
+        print("⏳ Almost there...")
+        await asyncio.sleep(1)
+
+        print("🚫 Milestone 2 not reached yet.")
+        print("🔁 Detour! Redirecting to final path to reach Milestone 2...")
+        await asyncio.sleep(1.5)
+
+        print("✅ Milestone 2 Reached!")
+        print("📸 Verifying photo at Milestone 2...")
+        await asyncio.sleep(1)
+
+        print("📝 Writing milestone data to DB...")
+        await asyncio.sleep(1)
 
         return VerifyPhotoEvent()
 
     @step
-    async def VerifyPhoto(self, ctx: Context, ev: VerifyPhotoEvent) -> StopEvent | TrackingEvent:
-        print("And finally populating DB for Calories Burned and Steps Walked today.")
-        return StopEvent(result="Done All Steps")
+    async def VerifyPhoto(self, ctx: Context, ev: VerifyPhotoEvent) -> StopEvent:
+        print("🧮 Calculating fitness stats...")
+        await asyncio.sleep(1)
+
+        print("🔥 Calories Burned and 🚶 Steps Walked being recorded...")
+        await asyncio.sleep(1)
+
+        print("💾 Writing to DB: Fitness data for the day ✅")
+        await asyncio.sleep(1)
+
+        print("🏁 Final Step complete! All milestones and data logged.")
+        await asyncio.sleep(0.5)
+        return StopEvent(result="✅ Done All Steps")
+
+        # return StopEvent(result="🏁 All Steps Completed!")
 
     @step
-    async def FinalStep(self, ev:TrackingEvent) -> StopEvent:
-        return StopEvent(result="Done All Steps")
+    async def FinalStep(self, ev: StopEvent) -> StopEvent:
+        print("🏁 Final Step complete! All milestones and data logged.")
+        await asyncio.sleep(0.5)
+        return StopEvent(result="✅ Done All Steps")
 
 
 # === MAIN EXECUTION ===
@@ -291,7 +321,7 @@ class WalkWithScottyAppWorkflow(Workflow):
 async def main():
     gemini_api_key = os.getenv("API_KEY") 
 
-    workflow = WalkWithScottyAppWorkflow(timeout=10, verbose=True)
+    workflow = WalkWithScottyAppWorkflow(timeout=60, verbose=True)
     notification_agent, distance_agent, route_agent, tracking_agent, milestone_agent = create_agents(gemini_api_key)
 
     result = await workflow.run(
