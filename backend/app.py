@@ -18,6 +18,9 @@ from llama_index.core.tools import FunctionTool
 from llama_index.core.agent import ReActAgent
 from llama_index.llms.google_genai import GoogleGenAI
 
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # === MOCK DB ===
 class DBUtils:
@@ -286,7 +289,7 @@ class WalkWithScottyAppWorkflow(Workflow):
 # === MAIN EXECUTION ===
 
 async def main():
-    gemini_api_key = os.getenv("GEMINI_API_KEY", "") 
+    gemini_api_key = os.getenv("API_KEY") 
 
     workflow = WalkWithScottyAppWorkflow(timeout=10, verbose=True)
     notification_agent, distance_agent, route_agent, tracking_agent, milestone_agent = create_agents(gemini_api_key)
