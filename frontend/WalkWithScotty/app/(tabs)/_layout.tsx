@@ -1,10 +1,6 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
-
-// Import the Setup component we created earlier
-import Setup from './setup'; // Adjust the path if needed
-
 import { HapticTab } from '@/components/HapticTab'; // Make sure these paths are correct
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
@@ -31,23 +27,23 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="start"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Start',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="dog.fill" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="setup" //  This name is used for routing.
+        name="settings" //  This name is used for routing.
         options={{
-          title: 'Setup', //  The title displayed in the tab bar.
+          title: 'Settings', //  The title displayed in the tab bar.
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="gear" color={color} />, // Example icon
         }}
       />
